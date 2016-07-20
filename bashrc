@@ -1,7 +1,49 @@
+#===============================================================================
+# Variables
+#===============================================================================
+
+export PATH="~/.local/bin:~/bin:$PATH"
+
+# color prompt - from http://ascii-table.com/ansi-escape-sequences.php
+# Text attributes
+# 0   All attributes off
+# 1   Bold on
+# 4   Underscore (on monochrome display adapter only)
+# 5   Blink on
+# 7   Reverse video on
+# 8   Concealed on
+#  
+# Foreground colors
+# 30  Black
+# 31  Red
+# 32  Green
+# 33  Yellow
+# 34  Blue
+# 35  Magenta
+# 36  Cyan
+# 37  White
+#  
+# Background colors
+# 40  Black
+# 41  Red
+# 42  Green
+# 43  Yellow
+# 44  Blue
+# 45  Magenta
+# 46  Cyan
+# 47  White
+#
+export PS1="\[\e[1;36m\]\u@\h:\w$\[\e[m\] "
 export EDITOR=gvim
+
 alias rm='rm -v'
 alias mv='mv -v'
 alias todo='gvim ~/notes/todo.rst'
+
+#===============================================================================
+# Functions
+#===============================================================================
+
 
 # convert whitespace delimiters to single tabs
 function tab { sed -e "s/  */\t/g" -e "s/^\t//"; }
@@ -36,17 +78,74 @@ function tprint {
 }
 
 
+# simple calculations from command line
+function calc { echo -e "scale=4\n $@\n quit" | bc; }
+
+# add up a column of numbers
+function sum { awk 'BEGIN {c=0}; END {print c}; {c+=$1}'; }
+
+# count number of fields in a text file
+function nf { head -100 $1 | awk '{print NF}' | sort -k1n | tac | head -1; }
 
 
-# color prompt - change to distinguish machines
-#
-#   30 black 
-#   31 red
-#   32 green
-#   33 yellow
-#   34 blue
-#   35 magenta
-#   36 cyan
-#   37 white
-#
-export PS1="\[\e[1;36m\]\u@\h:\w$\[\e[m\] "
+# make logfile names that don't collide
+function getbasename {
+    BASENAME="$(basename $1)"
+    if [ -f ${BASENAME}.out ]; then
+        LOGNUM=0
+        LOGFILE=${BASENAME}.${LOGNUM}.out
+        while [ -f $LOGFILE ]; do
+            LOGNUM=$[ $LOGNUM + 1]
+            LOGFILE=${BASENAME}.${LOGNUM}.out
+        done
+    else
+        LOGFILE=${BASENAME}.out
+    fi  
+    echo $LOGFILE
+}
+
+# nohup with custom logfile and mail to user when finisheda
+# requires mutt to send mail. email address must be defined in 
+# $USER_EMAIL
+USER_EMAIL=$(cat ~/.forward)
+function mailhup {
+    LOGFILE=$(getbasename $1) 
+    echo "Logging to ${LOGFILE} ..." 
+    echo "----[start: $(date) ]------------------------------------" >>${LOGFILE} 
+    echo "Starting job $@..." >>${LOGFILE} 
+    nohup $@ >>$LOGFILE
+    MYEXIT=$?
+    echo "--------------------------------------[end: $(date) ]----" >>${LOGFILE}
+
+    FILESIZE=$(stat -c%s ${LOGFILE})
+    LINES=$(wc -l ${LOGFILE} | cut -f1 -d" ")
+    SUBJECT="results for $@ [exit code ${MYEXIT}]"
+
+    # if output is small, put in email
+    # if output is large, put in first & last 30 lines and attach remainder
+    # if output is >25Mb, dont' attach
+    if (( $LINES < 50 )); then
+        cat $LOGFILE | mutt -s "$SUBJECT" -a $LOGFILE -- $USER_EMAIL
+        else
+            tmpname=$(basename $1)_$(date +%G-%m-%d_%Hh-%Mm).tmp
+            head --lines 30 $LOGFILE >$tmpname
+            echo "--- (skipping to last 30 lines of output) ---" >>$tmpname
+            tail --lines 30 $LOGFILE >>$tmpname
+            if (($FILESIZE > 25*1024*1024)); then
+                echo "(logfile bigger than 25mb)" >>$tmpname
+                cat $tmpname | mutt -s "$SUBJECT" $USER_EMAIL
+            else
+                echo "(rest of output attached)...">>$tmpname
+                cat $tmpname | mutt -s "$SUBJECT" -a $LOGFILE --  $USER_EMAIL
+            fi  
+    rm $tmpname
+    fi
+
+    # if able, give notification
+    if [ -n "$DISPLAY" ] && [ -n "$(which zenity)" ]; then
+        ztext="${@}\nfinished at: $(date)\nexit code: $MYEXIT"
+        zenity --info --title="mailhup: $1 finished [exit code ${MYEXIT}]" --text="${ztext}" &
+    fi
+}
+
+
