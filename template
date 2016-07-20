@@ -1,0 +1,69 @@
+#!/bin/bash
+EXIT_SUCESS=0
+EXIT_BAD_ARGS=1
+EXIT_FILE_NOT_FOUND=85
+EXIT_SEG_FAULT=139
+EXIT_KILLED=143
+OPTIONS="bghl"
+MIN_ARGS=1
+logging=0
+log_file=/dev/null
+cat_cmd=cat
+alt_log_file="$(basename $0).$(date +%Y-%m-%d).log"
+
+function do_usage {
+	expand_opts=$(echo $OPTIONS | sed -e "s/://g" -e "s/\(.\)/-\1 /g" -e "s/ $//")
+	echo "usage: $(basename $0) [$expand_opts] filename" 
+}
+
+function do_help {
+    cat << ____EOH
+    $(do_usage)
+
+    Summary of program here.
+
+    Options:
+
+   	    -b    Input file(s) are bzipped
+
+	    -g    Input file(s) are gzipped
+
+        -l    Enable logging to ./$alt_log_file
+
+    Some epilog.
+____EOH
+}
+
+#parse options
+while getopts $OPTIONS option; do
+	case $option in
+		b ) cat_cmd=bzcat;;
+		g ) cat_cmd=zcat;;
+		l ) logging=1;;
+		h ) do_help
+			exit $EXIT_SUCCESS;;
+		* ) do_usage
+			exit $EXIT_BAD_ARGS;;
+	esac
+done
+shift $(($OPTIND - 1))
+if [ $# -lt $MIN_ARGS ]; then
+	echo "At least $MIN_ARGS arguments required. Exiting."
+	echo ""
+	do_usage
+	exit $EXIT_BAD_ARGS
+fi
+
+#logging
+if [ $logging -eq 1 ]; then
+	log_file=$alt_log_file
+fi
+
+#body
+{
+	exit_status=$EXIT_SUCCESS #redefine exit status below if something happens
+	for file in $@; do
+		$cat_cmd "$file" # process files here
+	done
+} | tee -a $log_file
+exit $exit_status

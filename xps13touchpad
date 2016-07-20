@@ -1,0 +1,12 @@
+#!/bin/bash
+# This script toggles the Dell XPS 13 touchpad in Ubuntu 14.04
+# Bind this to a key combo in Unity/Gnome/et c
+statenames=(disabled enabled)
+
+id=$(xinput list | grep DLL0665 | awk '{ match($0, /id=([1234567890]+)/,arr); print arr[1] }')
+state=$(xinput list-props $id | grep Enabled | sed -e "s/\s\+Device Enabled ([0-9]\+):\s\+\([0-9]\+\)/\1/")
+newstate=$(( $state ^ 1))
+
+
+xinput --set-prop $id 'Device Enabled' $newstate
+notify-send  --icon=input-mouse -c 'device' "Touchpad ${statenames[$newstate]}."

@@ -1,0 +1,67 @@
+#!/bin/bash
+# Catenate PDFs into a single document
+# Requires ghostscript
+
+EXIT_SUCESS=0
+EXIT_BAD_ARGS=1
+EXIT_FILE_NOT_FOUND=85
+OPTIONS="hl"
+MIN_ARGS=2
+logging=0
+log_file=/dev/null
+cat_cmd=cat
+alt_log_file="$(basename $0).$(date +%Y-%m-%d).log"
+
+function do_usage {
+	expand_opts=$(echo $OPTIONS | sed -e "s/\(.\)/-\1 /g" -e "s/ $//")
+	echo "usage: $(basename $0) [$expand_opts] output_file input_file1 [input_file2...inputfileN]" 
+}
+
+function do_help {
+    cat << ____EOH
+    $(do_usage)
+
+    Concatenates PDFs into a single document using ghostscript
+
+    Options:
+
+        -l    Enable logging to ./$alt_log_file
+
+        -h    Show help and exit
+
+____EOH
+}
+
+#parse options
+while getopts $OPTIONS option; do
+	case $option in
+		l ) logging=1;;
+		h ) do_help
+			exit $EXIT_SUCCESS;;
+		* ) do_usage
+			exit $EXIT_BAD_ARGS;;
+	esac
+done
+shift $(($OPTIND - 1))
+if [ $# -lt $MIN_ARGS ]; then
+	echo "At least $MIN_ARGS arguments required. Exiting."
+	echo ""
+	do_usage
+	exit $EXIT_BAD_ARGS
+fi
+output_file=$1
+shift 1
+
+#logging
+if [ $logging -eq 1 ]; then
+	log_file=$alt_log_file
+fi
+
+#body
+{
+	exit_status=$EXIT_SUCCESS #redefine exit status below if something happens
+	gs -q -sPAPERSIZE=letter -dNOPAUSE -dBATCH -sDEVICE=pdfwrite \
+	   -sOutputFile=$output_file $@
+	exit_status=$?
+} | tee -a $log_file
+exit $exit_status

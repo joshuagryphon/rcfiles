@@ -1,0 +1,175 @@
+#!/bin/bash
+#Provides groff-based formatting for text files.
+#Flags can be specified to output in postscript, html, or screen format
+#JGD 2010
+
+#defaults
+FORMAT=ascii
+ENDCMD=less
+
+#help functions
+function usage {
+FN=`basename $0`
+cat <<____EOU
+Usage: $FN [-o] [-f utf8 | latin1 | ascii | ps | html | xhtml ] <filename>
+
+    This script reformats sterotypically formatted text files
+    into various formats, specified with the "-f" flag
+
+    Options:
+
+        -f    Specifies format. Valid options are:
+              ascii, utf8, latin1, ps, html, xhtml
+        -o    Dumps output to standard out, instead of to 'less'
+        -h    This help message
+        -e    Output example textfile, and quit
+
+    Requires:
+        awk (any version)
+        groff
+____EOU
+}
+
+function example {
+cat <<EOE
+Title
+
+A few descriptive sentences
+
+A section header, ending in a colon:
+-List item 1, beginning with a hyphen. Spaces or tabs can precede hyphen
+-List item 2, beginning with a hyphen
+
+Another section header, ending in a colon:
+1. Numbered item 1. Spaces or tabs can precede and follow the number. 
+2) Numbered item 2. As above
+
+A section header that precedes a paragraph:
+Many sentences here, if you like. Or just a few! Did you know
+you can see how this example is formatted by typing
+
+    $0 -e | $0 '-'
+
+Keywords:
+List of keywords here
+EOE
+}
+
+
+#parse options
+while getopts ":f:hoe" options; do
+	case $options in
+		o ) ENDCMD=cat;;
+		f ) FORMAT=$OPTARG;;
+		e ) example
+			exit 1;;
+		h ) usage
+			exit 1;;
+		* ) usage
+			exit 1;;
+	esac
+done
+shift $(($OPTIND -1))
+
+#make sure we have a file to open
+if [ $# -lt 1 ]; then
+	usage
+	exit 2 
+fi
+
+
+#body of program - nested awk script
+awk 'function format_heading(str) {return str}
+
+function format_cols(numcols) {
+	sreturn = ""
+	for(i = 0; i < numcols; i++)
+		{ sreturn = sreturn"a" }
+	sreturn = sreturn"."
+	return sreturn
+}
+
+BEGIN {
+	bullet = "-"
+	quote ="\""
+	nextnum = 1
+	FS = "\t"
+	is_table = 0
+}
+
+#reset flags for main loop
+{ done = 0 }
+
+#change first record to page title and major header
+NR == 1 {
+	print ".TH protocol 0 "quote$0quote" protocol "quote$0quote
+	print ".SH \""format_heading($0)"\""
+	done = 1
+}
+
+#change lines ending in colons to section headers
+/[^:]*:[:space:]*$/ {
+	print ".SH \""format_heading($0)"\""
+	done = 1
+}
+
+#remove lines that only contain hyphens and whitespace
+/^--*[ ]*$/ {
+	gsub(/^--*[ ]*$/,"",$0)
+	print ".LP"
+	done = 1
+}
+
+#identify lines that are list items & remove leading hyphens or numbers
+/^[\t ]*-/ {
+	gsub(/^[\t ]*-/,"",$0)
+	print ".IP "bullet" 4 nf"
+	print $0
+	done = 1
+}
+/^[\t ]*[0-9]*[\.\)][\t ][\t ]*/ {
+	gsub(/^[\t ]*[0-9]*[\t ]*[\.\)][\t ]*/,"",$0)
+	print ".IP \""sprintf("%2d.",nextnum)"\" 4"
+	nextnum = nextnum + 1
+	print $0
+	done = 1
+}
+
+#find tables
+/^[::space::]*[^\t][^\t]*\t\t*[^\t][^\t]*(\t[\t]*[^\t][^\t]*)*$/ {
+	gsub(/^[\t]+|[\t]+$/,"",$0) #trim tables
+	numcols = NF
+	if(is_table == 1)
+		{ print $0 }
+	else
+		{
+			is_table = 1
+			print ".TS"
+			print format_cols(numcols)
+			print $0
+		}
+	done = 1
+}
+
+#use blank lines to close open tags
+/^[::space::]*$/ {
+	if(is_table == 1)
+		{
+			is_table = 0
+			print ".TE"
+		}
+	print ".LP"
+	done = 1
+}
+
+done == 0 {
+	if(is_table == 1)
+		{
+			is_table = 0
+			print ".TE"
+			print ".LP"
+		}
+	nextnum = 1
+	print $0
+}' $@ | groff -t -man -T${FORMAT} | $ENDCMD
+exit $?

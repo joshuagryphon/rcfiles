@@ -3,14 +3,16 @@
 "=============================================================================
 
 "defaults
+set backspace=indent,eol,start
 set number
 set ruler
-set ai
-syntax on
+set autoindent
+set showcmd
 set expandtab
-set tabstop=2
-set shiftwidth=2
+set tabstop=4
+set shiftwidth=4
 set textwidth=80
+syntax on
 
 "behaviors for ReStructuredText
 augroup WrapLineInRST
@@ -58,7 +60,42 @@ au VimEnter * RainbowLoad
 " color scheme. see https://github.com/altercation/vim-colors-solarized
 if has('gui_running')
   set background=light
+  set guifont=Monospace\ 8
   colorscheme solarized
 endif
 
 
+
+"" requires rainbowpares
+"au VimEnter * RainbowParenthesesToggle
+"au Syntax * RainbowParenthesesLoadRound
+"au Syntax * RainbowParenthesesLoadSquare
+"au Syntax * RainbowParenthesesLoadBraces
+
+
+
+" Other boilerplate
+
+" Only do this part when compiled with support for autocommands.
+if has("autocmd")
+
+  " Enable file type detection.
+  " Use the default filetype settings, so that mail gets 'tw' set to 72,
+  " 'cindent' is on in C files, etc.
+  " Also load indent files, to automatically do language-dependent indenting.
+  filetype plugin indent on
+
+  " Put these in an autocmd group, so that we can delete them easily.
+  augroup vimrcEx
+  au!
+
+  " For all text files set 'textwidth' to 78 characters.
+  autocmd FileType text setlocal textwidth=78
+
+  augroup END
+
+else
+
+  set autoindent		" always set autoindenting on
+
+endif " has("autocmd")
