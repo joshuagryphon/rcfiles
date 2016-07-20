@@ -1,0 +1,72 @@
+backend         : TkAgg
+tk.window_focus : False
+#verbose.level   : debug
+
+lines.linewidth : 1.0
+lines.linestyle : -
+lines.color     : CCCCCC
+lines.solid_joinstyle : miter
+lines.antialiased : True
+
+patch.linewidth : 0.5
+patch.facecolor : 007ADF
+patch.antialiased : True
+patch.edgecolor   : FFFFFF
+
+font.family     : sans-serif
+font.serif     : Georgia
+font.sans-serif : Bitstream Vera Sans, Helvetica, Arial, Verdana, DejaVu Sans,
+font.monospace  : Andale Mono, Droid Mono
+
+axes.edgecolor  : CCCCCC
+axes.axisbelow  : True
+axes.prop_cycle : cycler("color","2A7FFF, FF623F, FDB300, 11AA66, 9737B7, 73CF00, FF6003")
+axes.labelcolor : 000000
+
+xtick.color     : 222222
+ytick.color     : 222222
+xtick.direction : out
+ytick.direction : out
+#xtick.major.pad : 8 # distance to & from tick labels
+#xtick.minor.pad : 8
+#ytick.major.pad : 8
+#ytick.minor.pad : 8
+
+
+axes.grid : True
+grid.color     : CCCCCC
+grid.linestyle : -
+grid.linewidth : 0.5
+
+figure.dpi       : 100
+figure.facecolor : FFFFFF
+figure.edgecolor : CCCCCC
+
+legend.isaxes    : True
+legend.numpoints : 1
+legend.frameon   : False
+legend.scatterpoints : 1
+
+# make nice svg output
+path.simplify : True
+svg.fonttype : none    # export type as actual type that is editable
+
+
+# type & figure sizes for figure panel
+#figure.figsize   : 3.0, 2.25
+#font.sans-serif : Arial
+#font.size       : 8
+#axes.titlesize  : 8
+#axes.labelsize  : 8
+#xtick.labelsize : 8
+#ytick.labelsize : 8
+#legend.fontsize : 8
+
+# type & figure sizes for powerpoint or notebook
+figure.figsize  : 7, 5.25
+axes.titlesize  : 12
+axes.labelsize  : 10
+xtick.labelsize : 10
+ytick.labelsize : 10
+legend.fontsize : 10
+
