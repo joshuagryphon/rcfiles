@@ -10,18 +10,21 @@ function tab { sed -e "s/  */\t/g" -e "s/^\t//"; }
 function qu { sed -e "s/\(.*\)/'\1'/g"; }
 
 # print tables with minimum column width of `spacing`,
-# specified by `-s` (Default: 40) 
+# specified by `-s` (Default: 40). Delimiter `-d`
 function tprint {
     spacing=40
+    delim="\t"
     while getopts "s:" opt; do
         case $opt in
             s) spacing=$OPTARG
                shift 2;;
+            d) delim="$OPTARG"
+               shift 2;;
         esac
     done
 
-    cat $1 | awk -v spacing=${spacing} '
-        BEGIN { FS="\t" }
+    cat $1 | awk -v spacing=${spacing} -v delim=${delim} '
+        BEGIN { FS=delim }
         {
             out = ""
             for (i = 1; i < NF; i++) {
@@ -30,7 +33,7 @@ function tprint {
                     { size = size + spacing }
                 out = out""sprintf("%-"size"s",$i)
             }
-            print out""$(i)
+            print out""$i
         }
         '
 }
