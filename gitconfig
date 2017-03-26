@@ -1,6 +1,6 @@
 [user]
 	name = Joshua Griffin Dunn
-	email = joshua.g.dunn@gmail.com
+	email = USER_EMAIL
 [core]
 	editor = gvim
 [color]
