@@ -1,4 +1,72 @@
 "=============================================================================
+" Vundle & plugin config
+"=============================================================================
+
+" set up
+set nocompatible  " be iMproved, required
+filetype off      " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" others
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+" Plugin 'scrooloose/syntastic'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'godlygeek/tabular'
+Plugin 'Spellcheck'
+Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'altercation/vim-colors-solarized'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+
+" gitgutter
+set updatetime=250
+"let g:gitgutter_highlight_lines = 1
+
+
+" airline
+let g:airline#extensions#tabline#enabled = 1
+
+" rainbow parens
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+
+
+" syntastic
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+"let g:syntastic_python_checkers = ['pylint']
+"let g:syntastic_quiet_messages = { "type": "style" }
+
+
+" solarized
+if has('gui_running')
+  set background=light
+  set guifont=Monospace\ 8
+  colorscheme solarized
+endif
+
+
+
+"=============================================================================
 " Behaviors
 "=============================================================================
 
@@ -9,9 +77,9 @@ set ruler
 set autoindent
 set showcmd
 set expandtab
-set tabstop=4
-set shiftwidth=4
-set textwidth=80
+set tabstop=2
+set shiftwidth=2
+"set textwidth=80
 syntax on
 
 "behaviors for ReStructuredText
@@ -19,11 +87,12 @@ augroup WrapLineInRST
   autocmd!
   autocmd FileType rst setlocal wrap
   autocmd FileType rst setlocal tabstop=3 shiftwidth=3 textwidth=80
+"  autocmd FileType rst SpellCheck
 augroup END
 
 
 "=============================================================================
-" Toggle highlighting of A/T in DNA/RNA sequences
+" Misc funcs
 "=============================================================================
 
 highlight AT_HIGHLIGHT term=standout cterm=standout ctermfg=12 guifg=LightRed gui=bold
@@ -46,35 +115,10 @@ endfunction
 nmap <silent> AT :call ToggleAT()<CR>
 
 
+
 "=============================================================================
-" Load external scripts
-"=============================================================================
-
-
-"see https://github.com/oblitum/rainbow/blob/master/plugin/rainbow.vimc 
-let g:rainbow_active = 1
-let g:rainbow_guifgs = ['RoyalBlue3', 'DarkOrange3', 'DarkOrchid3', 'FireBrick']
-au VimEnter * RainbowLoad
-
-
-" color scheme. see https://github.com/altercation/vim-colors-solarized
-if has('gui_running')
-  set background=light
-  set guifont=Monospace\ 8
-  colorscheme solarized
-endif
-
-
-
-"" requires rainbowpares
-"au VimEnter * RainbowParenthesesToggle
-"au Syntax * RainbowParenthesesLoadRound
-"au Syntax * RainbowParenthesesLoadSquare
-"au Syntax * RainbowParenthesesLoadBraces
-
-
-
 " Other boilerplate
+"=============================================================================
 
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
