@@ -23,6 +23,7 @@ Plugin 'godlygeek/tabular'
 Plugin 'Spellcheck'
 Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'tpope/vim-fugitive'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -36,6 +37,9 @@ set updatetime=250
 
 " airline
 let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline_theme='light' " molokai, wombat, tomorrow, solarized
+set laststatus=2
 
 " rainbow parens
 au VimEnter * RainbowParenthesesToggle
@@ -60,7 +64,7 @@ au Syntax * RainbowParenthesesLoadBraces
 " solarized
 if has('gui_running')
   set background=light
-  set guifont=Monospace\ 8
+  set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 10
   colorscheme solarized
 endif
 
