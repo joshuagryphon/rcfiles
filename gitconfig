@@ -1,0 +1,12 @@
+[user]
+	name = Joshua Griffin Dunn
+	email = USER_EMAIL
+[core]
+	editor = gvim
+[color]
+	status = true
+	branch = true
+	diff = true
+
+[diff]
+	tool = meld
