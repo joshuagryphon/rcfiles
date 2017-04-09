@@ -6,6 +6,9 @@
 user_email=
 echo $user_email | tee -a ~/.forward
 
+# screenrc
+ln -s $(pwd)/screenrc ~/.screenrc
+
 # bashrc
 ln -s $(pwd)/bashrc ~/.bash_aliases
 
