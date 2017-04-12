@@ -21,13 +21,22 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'godlygeek/tabular'
 Plugin 'Spellcheck'
-Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'eapache/rainbow_parentheses.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'tpope/vim-fugitive'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
+
+
+
+" solarized
+if has('gui_running')
+  set background=light
+  set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 10
+  colorscheme solarized
+endif
 
 
 " gitgutter
@@ -41,11 +50,14 @@ let g:airline_powerline_fonts = 1
 let g:airline_theme='light' " molokai, wombat, tomorrow, solarized
 set laststatus=2
 
+
+
 " rainbow parens
 au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
+au VimEnter * RainbowParenthesesLoadRound
+au VimEnter * RainbowParenthesesLoadSquare
+au VimEnter * RainbowParenthesesLoadBraces
+au VimEnter * RainbowParenthesesLoadChevrons
 
 
 " syntastic
@@ -60,13 +72,6 @@ au Syntax * RainbowParenthesesLoadBraces
 "let g:syntastic_python_checkers = ['pylint']
 "let g:syntastic_quiet_messages = { "type": "style" }
 
-
-" solarized
-if has('gui_running')
-  set background=light
-  set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 10
-  colorscheme solarized
-endif
 
 
 
