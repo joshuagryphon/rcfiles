@@ -42,7 +42,7 @@ echo $user_email | tee -a ~/.forward
 [ -e "~/.screenrc" ] && echo "screenrc exists: skipping" || ln -s $(pwd)/screenrc ~/.screenrc 
 
 # bashrc
-[ -e "~/.bash_aliasess" ] && echo "bash_aliases exists: skipping" || ln -s $(pwd)/bashrc ~/.bash_aliases
+[ -e "~/.bash_aliases" ] && echo "bash_aliases exists: skipping" || ln -s $(pwd)/bashrc ~/.bash_aliases
 
 # vim
 [ -e "~/.vimrc" ] && echo "vimrc exists: skipping" || {
@@ -52,7 +52,7 @@ echo $user_email | tee -a ~/.forward
     # package manager
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
-    # powerline fonts
+    # powerline typefaces
     git clone https://github.com/powerline/fonts.git /tmp/tmp_fonts
     cd /tmp/tmp_fonts
     ./install.sh
@@ -68,3 +68,5 @@ echo $user_email | tee -a ~/.forward
 [ -e "~/.gitconfig" ] && echo "gitconfig exists: skipping" || {
     cat gitconfig | sed -e "s/USER_EMAIL/$user_email/" > ~/.gitconfig
 }
+
+echo "Done."
