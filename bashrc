@@ -38,7 +38,7 @@ export EDITOR=gvim
 
 alias rm='rm -v'
 alias mv='mv -v'
-alias todo='gvim ~/notes/todo.rst'
+alias todo='gvim -c "setlocal background=light" ~/notes/todo.rst'
 
 #===============================================================================
 # Functions

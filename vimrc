@@ -33,7 +33,7 @@ filetype plugin indent on    " required
 
 " solarized
 if has('gui_running')
-  set background=light
+  set background=dark
   set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 10
   colorscheme solarized
 endif
@@ -88,8 +88,16 @@ set showcmd
 set expandtab
 set tabstop=2
 set shiftwidth=2
+set listchars=eol:¬,tab:▸·,trail:·
 "set textwidth=80
 syntax on
+
+
+"show whitespace characters for python files
+augroup PythonFile    
+  autocmd!
+  autocmd FileType python autocmd FileType python setlocal list
+augroup END
 
 "behaviors for ReStructuredText
 augroup WrapLineInRST
