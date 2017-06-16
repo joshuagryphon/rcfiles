@@ -2,7 +2,8 @@
 # Variables
 #===============================================================================
 
-export PATH="~/.local/bin:~/bin:$PATH"
+export GOPATH="/home/joshua/.local/lib/go"
+export PATH="~/.local/bin:~/bin:${GOPATH}/bin:${PATH}"
 
 # color prompt - from http://ascii-table.com/ansi-escape-sequences.php
 # Text attributes
@@ -38,6 +39,7 @@ export EDITOR=gvim
 
 alias rm='rm -v'
 alias mv='mv -v'
+alias xclip='xclip -selection c'
 alias todo='gvim -c "setlocal background=light" ~/notes/todo.rst'
 
 #===============================================================================
