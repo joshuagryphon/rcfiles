@@ -34,7 +34,7 @@ filetype plugin indent on    " required
 " solarized
 if has('gui_running')
   set background=dark
-  set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 10
+  set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 8
   colorscheme solarized
 endif
 
