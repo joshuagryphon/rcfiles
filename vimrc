@@ -20,7 +20,7 @@ Plugin 'vim-airline/vim-airline-themes'
 " Plugin 'scrooloose/syntastic'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'godlygeek/tabular'
-Plugin 'Spellcheck'
+"Plugin 'Spellcheck'
 Plugin 'eapache/rainbow_parentheses.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'tpope/vim-fugitive'
@@ -102,6 +102,7 @@ augroup END
 "behaviors for ReStructuredText
 augroup WrapLineInRST
   autocmd!
+  autocmd FileType rst setlocal spell
   autocmd FileType rst setlocal wrap
   autocmd FileType rst setlocal tabstop=3 shiftwidth=3 textwidth=80
 "  autocmd FileType rst SpellCheck
