@@ -1,0 +1,19 @@
+# swap files
+*~
+*.swp
+
+# compiled source
+*.pyc
+*.o
+*.so
+build/
+dist/
+*egg-info/
+
+# other
+.*project
+.noseids
+.svn/
+.coverage/
+.settings/
+__pycache__/

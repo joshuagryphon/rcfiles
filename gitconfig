@@ -3,6 +3,8 @@
 	email = USER_EMAIL
 [core]
 	editor = gvim
+	excludesfile = /home/joshua/.gitignore_global
+
 [color]
 	status = true
 	branch = true

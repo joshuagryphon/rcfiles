@@ -69,4 +69,11 @@ echo $user_email | tee -a ~/.forward
     cat gitconfig | sed -e "s/USER_EMAIL/$user_email/" > ~/.gitconfig
 }
 
+[ -e "~/.gitignore_global" ] && echo "gitignore exists: skipping" || {
+    ln -s $(pwd)/gitignore_global ~/.gitignore_global
+}
+
+
+
+
 echo "Done."
