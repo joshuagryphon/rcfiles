@@ -1,4 +1,22 @@
-partial alphanumeric_keys 
+partial modifier_keys
+xkb_symbols "caps_level5_switch" {
+  key <CAPS> {
+    type[Group1]="ONE_LEVEL",
+    symbols[Group1] = [ ISO_Level5_Shift ]
+  };
+  include "level5(modifier_mapping)"
+};
+
+partial modifier_keys
+xkb_symbols "menu_level5_switch" {
+  key <MENU> {
+    type[Group1]="ONE_LEVEL",
+    symbols[Group1] = [ ISO_Level5_Shift ]
+  };
+  include "level5(modifier_mapping)"
+};
+
+default partial alphanumeric_keys 
 xkb_symbols "josh-custom" {
 
     name[Group1]= "English (US, with Greek phonetic alternates)";
@@ -14,8 +32,10 @@ xkb_symbols "josh-custom" {
     key <AD01> { [       q,      Q,           Greek_theta,            Greek_THETA    ] };
     key <AD02> { [       w,      W,           Greek_omega,            Greek_OMEGA    ] };
     key <AD03> { [       e,      E,           Greek_epsilon,          Greek_EPSILON  ] };
-    key <AD04> { [       r,      R,           Greek_rho,              Greek_RHO      ] };
-    key <AD05> { [       t,      T,           Greek_tau,              Greek_TAU      ] };
+//    key <AD04> { [       r,      R,           Greek_rho,              Greek_RHO      ] };
+//    key <AD05> { [       t,      T,           Greek_tau,              Greek_TAU      ] };
+    key <AD04> { [       r,      R,           Greek_rho,              Greek_RHO,        registered,   registered ], type="EIGHT_LEVEL" };
+    key <AD05> { [       t,      T,           Greek_tau,              Greek_TAU,        thorn,        THORN      ], type="EIGHT_LEVEL" };
     key <AD06> { [       y,      Y,           Greek_psi,              Greek_PSI      ] };
     key <AD07> { [       u,      U,           Greek_upsilon,          Greek_UPSILON  ] };
     key <AD08> { [       i,      I,           Greek_iota,             Greek_IOTA     ] };
@@ -24,9 +44,11 @@ xkb_symbols "josh-custom" {
     key <AD11> { [ bracketleft,  braceleft,   guillemotleft,          leftdoublequotemark  ] };
     key <AD12> { [bracketright,  braceright,  guillemotright,         rightdoublequotemark ] };
 
-    key <AC01> { [       a,      A,           Greek_alpha,            Greek_ALPHA    ] };
+//    key <AC01> { [       a,      A,           Greek_alpha,            Greek_ALPHA    ] };
     key <AC02> { [       s,      S,           Greek_sigma,            Greek_SIGMA    ] };
-    key <AC03> { [       d,      D,           Greek_delta,            Greek_DELTA    ] };
+//    key <AC03> { [       d,      D,           Greek_delta,            Greek_DELTA    ] };
+    key <AC01> { [       a,      A,           Greek_alpha,            Greek_ALPHA,      aring,        Aring     ], type="EIGHT_LEVEL" };
+    key <AC03> { [       d,      D,           Greek_delta,            Greek_DELTA,      eth,          ETH       ], type="EIGHT_LEVEL" };
     key <AC04> { [       f,      F,           Greek_phi,              Greek_PHI      ] };
     key <AC05> { [       g,      G,           Greek_gamma,            Greek_GAMMA    ] };
     key <AC06> { [       h,      H,           Greek_eta,              Greek_ETA      ] };
@@ -50,4 +72,6 @@ xkb_symbols "josh-custom" {
     key <BKSL> { [ backslash,    bar,         notsign,                brokenbar      ] };
 
     include "level3(ralt_switch)"
+
+    include "level5(rctrl_switch)"
 };
