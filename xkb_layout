@@ -16,6 +16,11 @@ xkb_symbols "menu_level5_switch" {
   include "level5(modifier_mapping)"
 };
 
+
+// level 1 standard US keyboard
+// level 3 Greek alternates, inverted punctuation, common math symbols, French/Spanish dead keys
+// level 5 archaic letters, French/Spanish/German additions, less common math symbols, arrows
+// level 7 logical symbols
 default partial alphanumeric_keys 
 xkb_symbols "josh-custom" {
 
@@ -23,51 +28,50 @@ xkb_symbols "josh-custom" {
 
     include "us(intl)"
 
-    key <TLDE> { [   grave,      asciitilde,  dead_grave,             dead_tilde     ] };
-    key <AE06> { [       6,      asciicircum, onequarter,             dead_circumflex ] };
-    key <AE10> { [       0,      parenright,  0x1000ca0,              degree         ] };
-    key <AE11> { [     minus,    underscore,  endash,                 emdash         ] };
-    key <AE12> { [     equal,    plus,        plusminus,              0x1002213,        notequal,     approximate ], type="EIGHT_LEVEL" }; // plusminus,  minusplus
+    key <TLDE> { [   grave,      asciitilde,  dead_grave,             dead_tilde                                                                ] };
+    key <AE06> { [       6,      asciicircum, onequarter,             dead_circumflex                                                           ] };
+    key <AE10> { [       0,      parenright,  0x1000ca0,              degree                                                                    ] };
+    key <AE11> { [     minus,    underscore,  endash,                 emdash                                                                    ] };
+    key <AE12> { [     equal,    plus,        plusminus,              0x1002213,        notequal,     approximate                               ] , type="EIGHT_LEVEL" }; // plusminus,  minusplus
 
-    key <AD01> { [       q,      Q,           Greek_theta,            Greek_THETA    ] };
-    key <AD02> { [       w,      W,           Greek_omega,            Greek_OMEGA    ] };
-    key <AD03> { [       e,      E,           Greek_epsilon,          Greek_EPSILON  ] };
-    key <AD04> { [       r,      R,           Greek_rho,              Greek_RHO,        registered,   registered ], type="EIGHT_LEVEL" };
-    key <AD05> { [       t,      T,           Greek_tau,              Greek_TAU,        thorn,        THORN      ], type="EIGHT_LEVEL" };
-    key <AD06> { [       y,      Y,           Greek_psi,              Greek_PSI      ] };
-    key <AD07> { [       u,      U,           Greek_upsilon,          Greek_UPSILON  ] };
-    key <AD08> { [       i,      I,           Greek_iota,             Greek_IOTA     ] };
-    key <AD09> { [       o,      O,           Greek_omicron,          Greek_OMICRON,    oe,            OE        ], type="EIGHT_LEVEL" };
-    key <AD10> { [       p,      P,           Greek_pi,               Greek_PI       ] };
-    key <AD11> { [ bracketleft,  braceleft,   guillemotleft,          leftdoublequotemark  ] };
-    key <AD12> { [bracketright,  braceright,  guillemotright,         rightdoublequotemark ] };
+    key <AD01> { [       q,      Q,           Greek_theta,            Greek_THETA                                                               ] };
+    key <AD02> { [       w,      W,           Greek_omega,            Greek_OMEGA                                                               ] };
+    key <AD03> { [       e,      E,           Greek_epsilon,          Greek_EPSILON,    e,            E,           0x1002203,         0x1002203 ] , type="EIGHT_LEVEL" }; // logical exists
+    key <AD04> { [       r,      R,           Greek_rho,              Greek_RHO,        registered,   registered                                ] , type="EIGHT_LEVEL" };
+    key <AD05> { [       t,      T,           Greek_tau,              Greek_TAU,        thorn,        THORN                                     ] , type="EIGHT_LEVEL" };
+    key <AD06> { [       y,      Y,           Greek_psi,              Greek_PSI                                                                 ] };
+    key <AD07> { [       u,      U,           Greek_upsilon,          Greek_UPSILON                                                             ] };
+    key <AD08> { [       i,      I,           Greek_iota,             Greek_IOTA,       0x1002194,     implies                                  ] , type="EIGHT_LEVEL" }; // if and only if
+    key <AD09> { [       o,      O,           Greek_omicron,          Greek_OMICRON,    oe,            OE                                       ] , type="EIGHT_LEVEL" };
+    key <AD10> { [       p,      P,           Greek_pi,               Greek_PI                                                                  ] };
+    key <AD11> { [ bracketleft,  braceleft,   guillemotleft,          leftdoublequotemark                                                       ] };
+    key <AD12> { [bracketright,  braceright,  guillemotright,         rightdoublequotemark                                                      ] };
 
-    key <AC02> { [       s,      S,           Greek_sigma,            Greek_SIGMA    ] };
-    key <AC01> { [       a,      A,           Greek_alpha,            Greek_ALPHA,      ae,            AE,         aring,        Aring     ], type="EIGHT_LEVEL" };
-    key <AC03> { [       d,      D,           Greek_delta,            Greek_DELTA,      eth,           ETH       ], type="EIGHT_LEVEL" };
-    key <AC04> { [       f,      F,           Greek_phi,              Greek_PHI      ] };
-    key <AC05> { [       g,      G,           Greek_gamma,            Greek_GAMMA    ] };
-    key <AC06> { [       h,      H,           Greek_eta,              Greek_ETA      ] };
-    key <AC07> { [       j,      J,           0x10003d1,              J              ] }; // script theta
-    key <AC08> { [       k,      K,           Greek_kappa,            Greek_KAPPA    ] };
+    key <AC02> { [       s,      S,           Greek_sigma,            Greek_SIGMA,      0x10000df,     0x1001e9e                                ] , type="EIGHT_LEVEL" }; // estset
+    key <AC01> { [       a,      A,           Greek_alpha,            Greek_ALPHA,      ae,            AE,         0x1002200,        Aring      ] , type="EIGHT_LEVEL" }; // forall
+    key <AC03> { [       d,      D,           Greek_delta,            Greek_DELTA,      eth,           ETH                                      ] , type="EIGHT_LEVEL" };
+    key <AC04> { [       f,      F,           Greek_phi,              Greek_PHI                                                                 ] };
+    key <AC05> { [       g,      G,           Greek_gamma,            Greek_GAMMA                                                               ] };
+    key <AC06> { [       h,      H,           Greek_eta,              Greek_ETA,        leftarrow,    leftarrow                                 ] , type="EIGHT_LEVEL" };
+    key <AC07> { [       j,      J,           0x10003d1,              J,                downarrow,    downarrow                                 ] , type="EIGHT_LEVEL" }; // script theta
+    key <AC08> { [       k,      K,           Greek_kappa,            Greek_KAPPA,      uparrow,      uparrow                                   ] , type="EIGHT_LEVEL" };
 
-    key <AC09> { [       l,      L,           Greek_lambda,           Greek_LAMBDA   ] };
-    key <AC10> { [ semicolon,    colon,       paragraph,              section        ] };
-    key <AC11> { [ apostrophe,   quotedbl,    dead_acute,             dead_diaeresis ] };
+    key <AC09> { [       l,      L,           Greek_lambda,           Greek_LAMBDA,     rightarrow,   rightarrow                                ] , type="EIGHT_LEVEL" };
+    key <AC10> { [ semicolon,    colon,       paragraph,              section                                                                   ] };
+    key <AC11> { [ apostrophe,   quotedbl,    dead_acute,             dead_diaeresis                                                            ] };
 
-    key <AB01> { [       z,      Z,           Greek_zeta,             Greek_ZETA     ] };
-    key <AB02> { [       x,      X,           Greek_xi,               Greek_XI,         multiply,      division  ], type="EIGHT_LEVEL" };
-    key <AB03> { [       c,      C,           Greek_chi,              Greek_CHI,        ccedilla,      Ccedilla  ], type="EIGHT_LEVEL" };
-    key <AB04> { [       v,      V,           Greek_finalsmallsigma,  V              ] };
-    key <AB05> { [       b,      B,           Greek_beta,             Greek_BETA     ] };
-    key <AB06> { [       n,      N,           Greek_nu,               Greek_NU,         ntilde,        Ntilde    ], type="EIGHT_LEVEL" };
-    key <AB07> { [       m,      M,           Greek_mu,               Greek_MU       ] };
-    key <AB08> { [     comma,    less,        lessthanequal,          infinity       ] };
-    key <AB09> { [    period,    greater,     greaterthanequal,       ellipsis       ] };
-    key <AB10> { [     slash,    question,    questiondown,           dead_hook      ] };
-    key <BKSL> { [ backslash,    bar,         notsign,                brokenbar      ] };
+    key <AB01> { [       z,      Z,           Greek_zeta,             Greek_ZETA                                                                ] };
+    key <AB02> { [       x,      X,           Greek_xi,               Greek_XI,         multiply,      division                                 ] , type="EIGHT_LEVEL" };
+    key <AB03> { [       c,      C,           Greek_chi,              Greek_CHI,        ccedilla,      Ccedilla                                 ] , type="EIGHT_LEVEL" };
+    key <AB04> { [       v,      V,           Greek_finalsmallsigma,  V                                                                         ] };
+    key <AB05> { [       b,      B,           Greek_beta,             Greek_BETA                                                                ] };
+    key <AB06> { [       n,      N,           Greek_nu,               Greek_NU,         ntilde,        Ntilde                                   ] , type="EIGHT_LEVEL" };
+    key <AB07> { [       m,      M,           Greek_mu,               Greek_MU                                                                  ] };
+    key <AB08> { [     comma,    less,        lessthanequal,          infinity                                                                  ] };
+    key <AB09> { [    period,    greater,     greaterthanequal,       ellipsis                                                                  ] };
+    key <AB10> { [     slash,    question,    questiondown,           dead_hook                                                                 ] };
+    key <BKSL> { [ backslash,    bar,         notsign,                brokenbar                                                                 ] };
 
     include "level3(ralt_switch)"
-
     include "level5(rctrl_switch)"
 };
