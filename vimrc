@@ -89,6 +89,7 @@ set expandtab
 set tabstop=2
 set shiftwidth=2
 set listchars=eol:¬,tab:▸·,trail:·
+set hlsearch "highlight search results
 "set textwidth=80
 syntax on
 
