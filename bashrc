@@ -34,7 +34,7 @@ export PATH="~/.local/bin:~/bin:${GOPATH}/bin:${PATH}"
 # 46  Cyan
 # 47  White
 #
-export PS1="\[\e[1;36m\]\u@\h:\w$\[\e[m\] "
+export PS1="\[\033[1;38;5;197m\]\u@\h:\w$\[\e[m\] "
 export EDITOR=gvim
 
 alias rm='rm -v'
