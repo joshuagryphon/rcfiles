@@ -2,6 +2,7 @@
 # Variables
 #===============================================================================
 
+export LD_LIBRARY_PATH="/usr/local/lib:${LD_LIBRARY_PATH}"
 export GOPATH="/home/joshua/.local/lib/go"
 export PATH="~/.local/bin:~/bin:${GOPATH}/bin:${PATH}"
 
