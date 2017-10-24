@@ -36,7 +36,7 @@ xkb_symbols "josh-custom" {
 
     key <AD01> { [       q,      Q,           Greek_theta,            Greek_THETA                                                                      ]                      } ;
     key <AD02> { [       w,      W,           Greek_omega,            Greek_OMEGA                                                                      ]                      } ;
-    key <AD03> { [       e,      E,           Greek_epsilon,          Greek_EPSILON,    e,            E,           0x1002203,         0x1002203        ] , type="EIGHT_LEVEL" } ; // logical exists
+    key <AD03> { [       e,      E,           Greek_epsilon,          Greek_EPSILON,    e,            E,           0x1002203,         elementof        ] , type="EIGHT_LEVEL" } ; // logical exists
     key <AD04> { [       r,      R,           Greek_rho,              Greek_RHO,        registered,   registered                                       ] , type="EIGHT_LEVEL" } ;
     key <AD05> { [       t,      T,           Greek_tau,              Greek_TAU,        thorn,        THORN                                            ] , type="EIGHT_LEVEL" } ;
     key <AD06> { [       y,      Y,           Greek_psi,              Greek_PSI                                                                        ]                      } ;
