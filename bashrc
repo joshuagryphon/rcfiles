@@ -35,13 +35,15 @@ export PATH="~/.local/bin:~/bin:${GOPATH}/bin:${PATH}"
 # 46  Cyan
 # 47  White
 #
-export PS1="\[\033[1;38;5;197m\]\u@\h:\w$\[\e[m\] "
+#export PS1="\[\033[1;38;5;197m\]\u@\h:\w$\[\e[m\] "
 export EDITOR=gvim
 
 alias rm='rm -v'
 alias mv='mv -v'
 alias xclip='xclip -selection c'
 alias todo='gvim -c "setlocal background=light" ~/notes/todo.rst'
+
+source ~/.local_variables
 
 #===============================================================================
 # Functions
@@ -81,6 +83,8 @@ function tprint {
             print out""$i
         }
         '
+    unset spacing
+    unset delim
 }
 
 
