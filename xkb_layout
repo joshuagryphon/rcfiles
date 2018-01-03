@@ -43,7 +43,7 @@ xkb_symbols "josh-custom" {
     key <AD07> { [       u,      U,           Greek_upsilon,          Greek_UPSILON,    u,            U,           union,             union            ]                      } ;
     key <AD08> { [       i,      I,           Greek_iota,             Greek_IOTA,       ifonlyif,     implies,     intersection,      intersection     ] , type="EIGHT_LEVEL" } ;
     key <AD09> { [       o,      O,           Greek_omicron,          Greek_OMICRON,    oe,           OE,          logicalor,         logicaland       ] , type="EIGHT_LEVEL" } ;
-    key <AD10> { [       p,      P,           Greek_pi,               Greek_PI                                                                         ]                      } ;
+    key <AD10> { [       p,      P,           Greek_pi,               Greek_PI,         p,            P,           variation,         variation        ] , type="EIGHT_LEVEL" } ;
     key <AD11> { [ bracketleft,  braceleft,   guillemotleft,          leftdoublequotemark                                                              ]                      } ;
     key <AD12> { [bracketright,  braceright,  guillemotright,         rightdoublequotemark                                                             ]                      } ;
 
@@ -71,6 +71,7 @@ xkb_symbols "josh-custom" {
     key <AB09> { [    period,    greater,     greaterthanequal,       ellipsis,         periodcentered, periodcentered                                 ] , type="EIGHT_LEVEL" } ;
     key <AB10> { [     slash,    question,    questiondown,           dead_hook                                                                        ]                      } ;
     key <BKSL> { [ backslash,    bar,         notsign,                brokenbar                                                                        ]                      } ;
+    key <SPCE> { [     space,    space,       enspace,                emspace,          em3space,      em4space,    thinspace,    hairspace            ] , type="EIGHT_LEVEL" } ;
 
     include "level3(ralt_switch)"
     include "level5(rctrl_switch)"
