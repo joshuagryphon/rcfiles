@@ -40,7 +40,7 @@ xkb_symbols "josh-custom" {
     key <AD04> { [       r,      R,           Greek_rho,              Greek_RHO,        registered,   registered                                       ] , type="EIGHT_LEVEL" } ;
     key <AD05> { [       t,      T,           Greek_tau,              Greek_TAU,        thorn,        THORN                                            ] , type="EIGHT_LEVEL" } ;
     key <AD06> { [       y,      Y,           Greek_psi,              Greek_PSI                                                                        ]                      } ;
-    key <AD07> { [       u,      U,           Greek_upsilon,          Greek_UPSILON,    u,            U,           union,             union            ]                      } ;
+    key <AD07> { [       u,      U,           Greek_upsilon,          Greek_UPSILON,    u,            U,           union,             union            ] , type="EIGHT_LEVEL" } ;
     key <AD08> { [       i,      I,           Greek_iota,             Greek_IOTA,       ifonlyif,     implies,     intersection,      intersection     ] , type="EIGHT_LEVEL" } ;
     key <AD09> { [       o,      O,           Greek_omicron,          Greek_OMICRON,    oe,           OE,          logicalor,         logicaland       ] , type="EIGHT_LEVEL" } ;
     key <AD10> { [       p,      P,           Greek_pi,               Greek_PI,         p,            P,           variation,         variation        ] , type="EIGHT_LEVEL" } ;

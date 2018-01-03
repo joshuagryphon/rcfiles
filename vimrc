@@ -86,8 +86,8 @@ set ruler
 set autoindent
 set showcmd
 set expandtab
-set tabstop=2
-set shiftwidth=2
+set tabstop=4
+set shiftwidth=4
 set listchars=eol:¬,tab:▸·,trail:·
 set hlsearch "highlight search results
 "set textwidth=80
