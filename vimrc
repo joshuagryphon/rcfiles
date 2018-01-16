@@ -37,6 +37,8 @@ if has('gui_running')
   set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 10
   colorscheme solarized
 endif
+let g:solarized_contrast='high'
+
 
 
 " gitgutter
@@ -90,6 +92,7 @@ set tabstop=4
 set shiftwidth=4
 set listchars=eol:¬,tab:▸·,trail:·
 set hlsearch "highlight search results
+set colorcolumn=80
 "set textwidth=80
 syntax on
 
