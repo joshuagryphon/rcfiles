@@ -24,11 +24,12 @@ Plugin 'godlygeek/tabular'
 Plugin 'eapache/rainbow_parentheses.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'tpope/vim-fugitive'
+Plugin 'Valloric/YouCompleteMe'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
-
 
 
 " solarized
@@ -38,7 +39,6 @@ if has('gui_running')
   colorscheme solarized
 endif
 let g:solarized_contrast='high'
-
 
 
 " gitgutter
@@ -53,13 +53,19 @@ let g:airline_theme='light' " molokai, wombat, tomorrow, solarized
 set laststatus=2
 
 
-
 " rainbow parens
 au VimEnter * RainbowParenthesesToggle
 au VimEnter * RainbowParenthesesLoadRound
 au VimEnter * RainbowParenthesesLoadSquare
 au VimEnter * RainbowParenthesesLoadBraces
 au VimEnter * RainbowParenthesesLoadChevrons
+
+
+" youcompleteme
+let g:ycm_goto_buffer_command = 'horiontal-split'
+let g:ycm_filepath_completion_use_working_dir = 1
+nmap <silent> <C-D> :YcmCompleter GoTo<CR>
+nmap <silent> <C-R> :YcmCompleter GoToReferences<CR>
 
 
 " syntastic
