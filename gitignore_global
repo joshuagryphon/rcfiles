@@ -12,6 +12,7 @@ dist/
 
 # other
 .*project
+.tox/
 .noseids
 .svn/
 .coverage/
