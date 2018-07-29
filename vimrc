@@ -24,7 +24,7 @@ Plugin 'godlygeek/tabular'
 Plugin 'eapache/rainbow_parentheses.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'tpope/vim-fugitive'
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 
 
 " All of your Plugins must be added before the following line
@@ -62,10 +62,10 @@ au VimEnter * RainbowParenthesesLoadChevrons
 
 
 " youcompleteme
-let g:ycm_goto_buffer_command = 'horiontal-split'
-let g:ycm_filepath_completion_use_working_dir = 1
-nmap <silent> <C-D> :YcmCompleter GoTo<CR>
-nmap <silent> <C-R> :YcmCompleter GoToReferences<CR>
+"let g:ycm_goto_buffer_command = 'horiontal-split'
+"let g:ycm_filepath_completion_use_working_dir = 1
+"nmap <silent> <C-D> :YcmCompleter GoTo<CR>
+"nmap <silent> <C-R> :YcmCompleter GoToReferences<CR>
 
 
 " syntastic
@@ -106,7 +106,8 @@ syntax on
 "show whitespace characters for python files
 augroup PythonFile    
   autocmd!
-  autocmd FileType python autocmd FileType python setlocal list
+  autocmd FileType python
+  autocmd FileType python setlocal list
 augroup END
 
 "behaviors for ReStructuredText
