@@ -22,7 +22,7 @@ Plugin 'godlygeek/tabular'
 Plugin 'eapache/rainbow_parentheses.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'tpope/vim-fugitive'
-"Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'google/yapf'
 
 
@@ -34,7 +34,7 @@ filetype plugin indent on    " required
 " solarized
 if has('gui_running')
   set background=dark
-  set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 8
+  set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 10
   colorscheme solarized
 endif
 let g:solarized_contrast='high'
