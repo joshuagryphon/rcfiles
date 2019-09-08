@@ -4,7 +4,7 @@
 statenames=(disabled enabled)
 
 id=$(xinput list | grep DLL0 | awk '{ match($0, /id=([1234567890]+)/,arr); print arr[1] }')
-state=$(xinput list-props $id | grep Enabled | sed -e "s/\s\+Device Enabled ([0-9]\+):\s\+\([0-9]\+\)/\1/")
+state=$(xinput list-props $id | grep "Device Enabled" | sed -e "s/\s\+Device Enabled ([0-9]\+):\s\+\([0-9]\+\)/\1/")
 newstate=$(( $state ^ 1))
 
 
