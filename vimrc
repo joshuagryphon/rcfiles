@@ -24,6 +24,7 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'tpope/vim-fugitive'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'google/yapf'
+Plugin 'AndrewRadev/linediff.vim'
 
 
 " All of your Plugins must be added before the following line
@@ -97,8 +98,7 @@ syntax on
 "show whitespace characters for python files
 augroup PythonFile    
   autocmd!
-  autocmd FileType python
-;  autocmd FileType python setlocal list
+"  autocmd FileType python setlocal list
 augroup END
 
 
