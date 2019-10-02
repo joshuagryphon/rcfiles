@@ -5,6 +5,7 @@
 export LD_LIBRARY_PATH="/usr/local/lib:${LD_LIBRARY_PATH}"
 export GOPATH="/home/joshua/.local/lib/go"
 export PATH="~/.local/bin:~/bin:${GOPATH}/bin:${PATH}"
+export REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
 
 # color prompt - from http://ascii-table.com/ansi-escape-sequences.php
 # Text attributes

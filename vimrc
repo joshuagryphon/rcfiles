@@ -36,6 +36,7 @@ filetype plugin indent on    " required
 if has('gui_running')
   set background=dark
   set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 10
+  set guioptions-=T
   colorscheme solarized
 endif
 let g:solarized_contrast='high'
