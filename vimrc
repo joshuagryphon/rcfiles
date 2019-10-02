@@ -17,14 +17,13 @@ Plugin 'VundleVim/Vundle.vim'
 " others
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-" Plugin 'scrooloose/syntastic'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'godlygeek/tabular'
-"Plugin 'Spellcheck'
 Plugin 'eapache/rainbow_parentheses.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'tpope/vim-fugitive'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'google/yapf'
 
 
 " All of your Plugins must be added before the following line
@@ -54,6 +53,11 @@ let g:airline_theme='light' " molokai, wombat, tomorrow, solarized
 set laststatus=2
 
 
+" yapf
+map <C-Y> :call yapf#YAPF()<cr>
+imap <C-Y> <c-o> :call yapf#YAPF()<cr>
+
+
 " rainbow parens
 au VimEnter * RainbowParenthesesToggle
 au VimEnter * RainbowParenthesesLoadRound
@@ -65,22 +69,8 @@ au VimEnter * RainbowParenthesesLoadChevrons
 " youcompleteme
 let g:ycm_goto_buffer_command = 'horiontal-split'
 let g:ycm_filepath_completion_use_working_dir = 1
-nmap <silent> <C-D> :YcmCompleter GoTo<CR>
-nmap <silent> <C-R> :YcmCompleter GoToReferences<CR>
-
-
-" syntastic
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
-"let g:syntastic_python_checkers = ['pylint']
-"let g:syntastic_quiet_messages = { "type": "style" }
-
+nmap <silent> <C-Y> <C-D> :YcmCompleter GoTo<CR>
+nmap <silent> <C-Y> <C-R> :YcmCompleter GoToReferences<CR>
 
 
 
@@ -99,7 +89,7 @@ set tabstop=4
 set shiftwidth=4
 set listchars=eol:¬,tab:▸·,trail:·
 set hlsearch "highlight search results
-set colorcolumn=80
+set colorcolumn=80,100
 "set textwidth=80
 syntax on
 
@@ -107,8 +97,10 @@ syntax on
 "show whitespace characters for python files
 augroup PythonFile    
   autocmd!
-  autocmd FileType python autocmd FileType python setlocal list
+  autocmd FileType python
+;  autocmd FileType python setlocal list
 augroup END
+
 
 "behaviors for ReStructuredText
 augroup WrapLineInRST
