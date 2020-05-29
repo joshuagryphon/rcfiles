@@ -1,4 +1,9 @@
 #!/bin/bash
+
+#==============================================================================
+# Constants & default variables
+#==============================================================================
+
 EXIT_SUCESS=0
 EXIT_BAD_ARGS=1
 EXIT_FILE_NOT_FOUND=85
@@ -11,8 +16,13 @@ log_file=/dev/null
 cat_cmd=cat
 alt_log_file="$(basename $0).$(date +%Y-%m-%d).log"
 
+
+#==============================================================================
+# Help
+#==============================================================================
+
 function do_usage {
-	expand_opts=$(echo $OPTIONS | sed -e "s/://g" -e "s/\(.\)/-\1 /g" -e "s/ $//")
+	expand_opts=$(echo $OPTIONS | sed -e "s/\(.\)/-\1 /g" -e "s/-:/ARG/g" -e "s/ $//")
 	echo "usage: $(basename $0) [$expand_opts] filename" 
 }
 
@@ -34,7 +44,12 @@ function do_help {
 ____EOH
 }
 
-#parse options
+
+#==============================================================================
+# Arguments
+#==============================================================================
+
+# Parse optional arguments
 while getopts $OPTIONS option; do
 	case $option in
 		b ) cat_cmd=bzcat;;
@@ -54,12 +69,15 @@ if [ $# -lt $MIN_ARGS ]; then
 	exit $EXIT_BAD_ARGS
 fi
 
-#logging
+# Set up logging
 if [ $logging -eq 1 ]; then
 	log_file=$alt_log_file
 fi
 
-#body
+
+#==============================================================================
+# Program body
+#==============================================================================
 {
 	exit_status=$EXIT_SUCCESS #redefine exit status below if something happens
 	for file in $@; do

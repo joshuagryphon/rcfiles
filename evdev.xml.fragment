@@ -8,7 +8,7 @@
         <variant>
           <configItem>
             <name>josh-custom</name>
-            <shortDescription><jgd></shortDescription>
+            <shortDescription>jgd</shortDescription>
             <description>US (JGD's, with Greek phonetic alternates)</description>
           </configItem>
         </variant>
