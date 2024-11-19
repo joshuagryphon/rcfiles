@@ -1,3 +1,4 @@
+    <!-- JGD custom keyboard layout. add to layoutList -->
     <layout>
       <configItem>
         <name>josh_custom</name>
