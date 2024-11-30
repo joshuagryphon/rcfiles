@@ -38,10 +38,11 @@ export PATH="~/.local/bin:~/bin:${GOPATH}/bin:${PATH}"
 #export PS1="\[\033[1;38;5;197m\]\u@\h:\w$\[\e[m\] "
 export EDITOR=gvim
 
+alias cat='batcat'
 alias rm='rm -v'
 alias mv='mv -v'
 alias xclip='xclip -selection c'
-alias todo='gvim -c "setlocal background=light" ~/notes/todo.rst'
+alias todo='gvim -c "setlocal background=light" /home/joshua/todo.rst'
 
 source ~/.local_variables
 
