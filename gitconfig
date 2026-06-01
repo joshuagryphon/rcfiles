@@ -12,3 +12,9 @@
 
 [diff]
 	tool = meld
+
+[init]
+	defaultBranch = main
+
+[pager]
+	branch = false
